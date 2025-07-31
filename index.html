@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emthuicuaanh</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&display=swap');
+        
+        body {
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #ffcce6, #f2e6ff);
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+        
+        .title-text {
+            font-family: 'Dancing Script', cursive;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .message-box {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .message-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .flower {
+            position: absolute;
+            opacity: 0.7;
+            animation: sway 8s ease-in-out infinite;
+        }
+        
+        @keyframes sway {
+            0%, 100% {
+                transform: rotate(-5deg);
+            }
+            50% {
+                transform: rotate(5deg);
+            }
+        }
+        
+        .sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: gold;
+            animation: sparkle 2s infinite;
+            opacity: 0;
+        }
+        
+        @keyframes sparkle {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0);
+                opacity: 0;
+            }
+        }
+        
+        .btn-love {
+            background: linear-gradient(45deg, #ff6b8b, #ff8e53);
+            box-shadow: 0 4px 15px rgba(255, 107, 139, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-love:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(255, 107, 139, 0.6);
+        }
+        
+        .btn-love:active {
+            transform: translateY(1px);
+        }
+        
+        .photo-frame {
+            border: 10px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: rotate(-3deg);
+            transition: all 0.3s ease;
+        }
+        
+        .photo-frame:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen relative">
+    <!-- Floating hearts -->
+    <div id="hearts-container"></div>
+    
+    <!-- Floating flowers -->
+    <div id="flowers-container"></div>
+    
+    <!-- Sparkles -->
+    <div id="sparkles-container"></div>
+    
+    <div class="container mx-auto px-4 py-12 relative z-10">
+        <div class="text-center mb-12">
+            <h1 class="title-text text-6xl md:text-7xl text-pink-600 mb-4 pulse">
+                <i class="fas fa-heart mr-2"></i> Anh Yêu Em <i class="fas fa-heart ml-2"></i>
+            </h1>
+            <p class="text-xl text-purple-700 italic">"Tình yêu của anh dành cho em như những vì sao trên trời - không thể đếm hết"</p>
+        </div>
+        
+        <div class="flex flex-col lg:flex-row items-center justify-center gap-12 mb-16">
+            <div class="photo-frame bg-white p-2 max-w-md">
+                <img src="assets/1.JPG" 
+                     alt="Couple in love" class="w-full h-auto">
+            </div>
+            
+            <div class="message-box p-8 max-w-lg">
+                <h2 class="title-text text-4xl text-pink-500 mb-6">Gửi Em Yêu!</h2>
+                <p class="text-lg text-gray-700 mb-4">
+                    Mỗi ngày bên em là một ngày hạnh phúc. Anh không biết nói gì hơn ngoài ba từ "Anh Yêu Em" từ tận đáy lòng.
+                </p>
+                <p class="text-lg text-gray-700 mb-6">
+                    Em là mặt trời của đời anh, là ngôi sao dẫn lối cho anh trong đêm tối. Cảm ơn em đã đến bên anh và cho anh một tình yêu đẹp như mơ.
+                </p>
+                <div class="text-center">
+                    <button id="love-btn" class="btn-love text-white font-bold py-3 px-8 rounded-full text-lg">
+                        <i class="fas fa-heart mr-2"></i> Nhấn vào đây em yêu <i class="fas fa-heart ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <div class="message-box p-6 text-center">
+                <div class="text-pink-500 text-5xl mb-4">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <h3 class="title-text text-2xl text-pink-600 mb-3">Trái Tim Anh</h3>
+                <p class="text-gray-700">
+                    Trái tim anh chỉ biết yêu mình em, chỉ biết đập vì em mà thôi.
+                </p>
+            </div>
+            
+            <div class="message-box p-6 text-center">
+                <div class="text-pink-500 text-5xl mb-4">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h3 class="title-text text-2xl text-pink-600 mb-3">Ngôi Sao May Mắn</h3>
+                <p class="text-gray-700">
+                    Em là ngôi sao may mắn nhất mà anh từng gặp trong đời này.
+                </p>
+            </div>
+            
+            <div class="message-box p-6 text-center">
+                <div class="text-pink-500 text-5xl mb-4">
+                    <i class="fas fa-music"></i>
+                </div>
+                <h3 class="title-text text-2xl text-pink-600 mb-3">Bản Tình Ca</h3>
+                <p class="text-gray-700">
+                    Tình yêu của chúng ta là bản tình ca đẹp nhất mà anh từng nghe.
+                </p>
+            </div>
+        </div>
+        
+        <div class="message-box p-8 text-center max-w-4xl mx-auto">
+            <h2 class="title-text text-4xl text-pink-600 mb-6">Những Kỷ Niệm Đẹp</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div class="bg-white p-2 rounded-lg shadow-md">
+                    <img src="assets/2.JPG" 
+                         alt="Memory 1" class="w-full h-32 object-cover rounded">
+                </div>
+                <div class="bg-white p-2 rounded-lg shadow-md">
+                    <img src="assets/3.JPG" 
+                         alt="Memory 2" class="w-full h-32 object-cover rounded">
+                </div>
+                <div class="bg-white p-2 rounded-lg shadow-md">
+                    <img src="assets/4.JPG" 
+                         alt="Memory 3" class="w-full h-32 object-cover rounded">
+                </div>
+                <div class="bg-white p-2 rounded-lg shadow-md">
+                    <img src="assets/5.JPG" 
+                         alt="Memory 4" class="w-full h-32 object-cover rounded">
+                </div>
+            </div>
+            <p class="text-lg text-gray-700 italic">
+                "Mỗi khoảnh khắc bên em đều là những kỷ niệm đẹp nhất mà anh không bao giờ muốn quên"
+            </p>
+        </div>
+    </div>
+    
+    <div class="bg-pink-600 text-white py-8 relative z-10">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="title-text text-3xl mb-4">Mãi Yêu Em</h3>
+            <p class="text-lg mb-6">Anh hứa sẽ luôn yêu em, chăm sóc em và làm em cười mỗi ngày</p>
+        </div>
+    </div>
+    
+    <script>
+        // Create floating hearts
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            const colors = ['#ff6b8b', '#ff8e53', '#ff4d80', '#ff66b3', '#ff3385'];
+            
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '<i class="fas fa-heart"></i>';
+                
+                // Random properties
+                const size = Math.random() * 20 + 10;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = 5 + Math.random() * 10;
+                
+                heart.style.fontSize = `${size}px`;
+                heart.style.color = color;
+                heart.style.left = `${left}vw`;
+                heart.style.top = `${top}vh`;
+                heart.style.animationDelay = `${delay}s`;
+                heart.style.animationDuration = `${duration}s`;
+                
+                container.appendChild(heart);
+            }
+        }
+        
+        // Create floating flowers
+        function createFlowers() {
+            const container = document.getElementById('flowers-container');
+            const flowers = ['🌸', '🌺', '🌹', '🌻', '🌼', '💐', '🏵️'];
+            
+            for (let i = 0; i < 10; i++) {
+                const flower = document.createElement('div');
+                flower.className = 'flower';
+                flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+                
+                // Random properties
+                const size = Math.random() * 30 + 20;
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = 8 + Math.random() * 10;
+                
+                flower.style.fontSize = `${size}px`;
+                flower.style.left = `${left}vw`;
+                flower.style.top = `${top}vh`;
+                flower.style.animationDelay = `${delay}s`;
+                flower.style.animationDuration = `${duration}s`;
+                
+                container.appendChild(flower);
+            }
+        }
+        
+        // Create sparkles
+        function createSparkles() {
+            const container = document.getElementById('sparkles-container');
+            
+            for (let i = 0; i < 50; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                
+                // Random properties
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                const delay = Math.random() * 2;
+                const duration = 1 + Math.random() * 2;
+                const size = Math.random() * 5 + 2;
+                
+                sparkle.style.left = `${left}vw`;
+                sparkle.style.top = `${top}vh`;
+                sparkle.style.animationDelay = `${delay}s`;
+                sparkle.style.animationDuration = `${duration}s`;
+                sparkle.style.width = `${size}px`;
+                sparkle.style.height = `${size}px`;
+                
+                container.appendChild(sparkle);
+            }
+        }
+        
+        // Love button effect
+        document.getElementById('love-btn').addEventListener('click', function() {
+            // Create explosion of hearts
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '<i class="fas fa-heart"></i>';
+                heart.style.position = 'fixed';
+                heart.style.fontSize = '20px';
+                heart.style.color = '#ff4d80';
+                
+                // Start from button position
+                const rect = this.getBoundingClientRect();
+                const startX = rect.left + rect.width / 2;
+                const startY = rect.top + rect.height / 2;
+                
+                heart.style.left = `${startX}px`;
+                heart.style.top = `${startY}px`;
+                
+                // Random end position
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 50 + Math.random() * 100;
+                const endX = startX + Math.cos(angle) * distance;
+                const endY = startY + Math.sin(angle) * distance - 50;
+                
+                document.body.appendChild(heart);
+                
+                // Animate
+                const duration = 1000 + Math.random() * 1000;
+                const startTime = performance.now();
+                
+                function animate(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    
+                    const x = startX + (endX - startX) * progress;
+                    const y = startY + (endY - startY) * progress - 50 * Math.sin(progress * Math.PI);
+                    const opacity = 1 - progress;
+                    const scale = 1 + progress;
+                    
+                    heart.style.left = `${x}px`;
+                    heart.style.top = `${y}px`;
+                    heart.style.opacity = opacity;
+                    heart.style.transform = `scale(${scale})`;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        heart.remove();
+                    }
+                }
+                
+                requestAnimationFrame(animate);
+            }
+            
+            // Show sweet alert
+            alert('Anh yêu em nhiều lắm! Em có yêu anh không? ❤️');
+        });
+        
+        // Initialize effects
+        window.addEventListener('load', function() {
+            createHearts();
+            createFlowers();
+            createSparkles();
+        });
+        
+        // Make elements draggable
+        document.querySelectorAll('.message-box, .photo-frame').forEach(element => {
+            let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            
+            element.onmousedown = dragMouseDown;
+            
+            function dragMouseDown(e) {
+                e = e || window.event;
+                e.preventDefault();
+                // Get the mouse cursor position at startup
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.onmouseup = closeDragElement;
+                // Call a function whenever the cursor moves
+                document.onmousemove = elementDrag;
+            }
+            
+            function elementDrag(e) {
+                e = e || window.event;
+                e.preventDefault();
+                // Calculate the new cursor position
+                pos1 = pos3 - e.clientX;
+                pos2 = pos4 - e.clientY;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                // Set the element's new position
+                element.style.top = (element.offsetTop - pos2) + "px";
+                element.style.left = (element.offsetLeft - pos1) + "px";
+            }
+            
+            function closeDragElement() {
+                // Stop moving when mouse button is released
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
+        });
+    </script>
+</html>
